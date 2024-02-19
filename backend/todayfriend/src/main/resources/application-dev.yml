@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    driver-class-name:
+    url: jdbc:mysql://localhost:3306/todayfriend?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: backjoon
+    password: backjoon1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
