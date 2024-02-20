@@ -1,9 +1,16 @@
+import { Global } from '@emotion/react';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './routes';
+import { reset } from './styles/Global';
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Global styles={reset} />
+    </>
+  );
 };
 
 export default App;
