@@ -3,7 +3,7 @@ import { Theme } from '@emotion/react';
 export const theme: Theme = {
   colors: {
     primary: '#6096BA', // 메인 색상
-    // secondary: '#FFA41B', // 보조 색상
+    secondary: '#457B9D', // 보조 색상
     // lightSecondary: '#FEF8ED',
     whitePrimary: '#FFF7F5',
     // accent: '#525FE1', // 강조 색상
