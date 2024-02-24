@@ -2,7 +2,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { HookFormInputListProps } from '@/types/input';
 
-import { HookFormInput } from '../Common/HookFormInput';
+import LabelInput from '../Common/Input/LabelInput';
+import { FormWrapper, InputList, InputListWrapper } from './style';
 
 interface SignUpFormData {
   fullName: string;
@@ -51,20 +52,20 @@ export const SignUpForm = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ul>
+    <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+      <InputListWrapper>
         {inputList.map((props) => (
-          <li key={props.name}>
-            <HookFormInput
+          <InputList key={props.name}>
+            <LabelInput
               register={register}
               errors={errors}
               formState={formState}
               {...props}
             />
-          </li>
+          </InputList>
         ))}
-      </ul>
+      </InputListWrapper>
       <button type="submit">회원가입</button>
-    </form>
+    </FormWrapper>
   );
 };
