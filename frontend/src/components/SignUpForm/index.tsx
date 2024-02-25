@@ -3,7 +3,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { HookFormInputListProps } from '@/types/input';
 
 import LabelInput from '../Common/Input/LabelInput';
-import { FormWrapper, InputList, InputListWrapper } from './style';
+import {
+  FormWrapper,
+  InputList,
+  InputListWrapper,
+  SignUpButton,
+} from './style';
 
 interface SignUpFormData {
   fullName: string;
@@ -65,7 +70,7 @@ export const SignUpForm = () => {
           </InputList>
         ))}
       </InputListWrapper>
-      <button type="submit">회원가입</button>
+      <SignUpButton type="submit">회원가입</SignUpButton>
     </FormWrapper>
   );
 };

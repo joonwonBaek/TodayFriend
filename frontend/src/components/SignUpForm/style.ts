@@ -25,3 +25,18 @@ export const GuideWrapper = styled.div`
   margin: 1.5rem 0 0.8rem 0;
   color: ${(props) => props.theme.colors.gray};
 `;
+
+export const SignUpButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  border-radius: 1rem;
+  background-color: ${(props) => props.theme.colors.secondary};
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.lightGray};
+  }
+`;
