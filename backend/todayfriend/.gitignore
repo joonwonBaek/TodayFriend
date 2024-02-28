@@ -39,3 +39,6 @@ out/
 
 ### application.properties ###
 **/src/main/resources/*.yml
+
+### TEST CODE
+**/src/test
