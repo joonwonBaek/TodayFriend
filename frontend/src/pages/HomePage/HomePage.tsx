@@ -1,3 +1,9 @@
+import BottomNavBar from '@/components/BottomNavBar';
+
 export const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <BottomNavBar />
+    </div>
+  );
 };
