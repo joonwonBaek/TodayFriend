@@ -26,7 +26,7 @@ const BottomNavBar = () => {
       icon: <Icon name="location_on" isFill={false} />,
     },
     {
-      path: PATH.SIGNUP,
+      path: PATH.MYPROFILE,
       icon: <Icon name="account_circle" isFill={false} />,
     },
   ];
