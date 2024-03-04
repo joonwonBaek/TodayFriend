@@ -1,8 +1,9 @@
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { PATH } from '@/routes/path';
 
 import Icon from '../Common/Icon';
+import { BottomNavBarWrapper, LinkWrapper } from './style';
 
 type pathType = typeof PATH.ROOT | typeof PATH.SIGNIN | typeof PATH.SIGNUP;
 
@@ -12,6 +13,13 @@ interface NavItemProps {
 }
 
 const BottomNavBar = () => {
+  const location = useLocation();
+  const currentPathName = location.pathname;
+
+  const isPathActive = (path: pathType) => {
+    return currentPathName === path;
+  };
+
   const navItems: NavItemProps[] = [
     {
       path: PATH.ROOT,
@@ -22,7 +30,7 @@ const BottomNavBar = () => {
       icon: <Icon name="sms" isFill={false} />,
     },
     {
-      path: PATH.SIGNUP,
+      path: PATH.LOCATION,
       icon: <Icon name="location_on" isFill={false} />,
     },
     {
@@ -31,13 +39,16 @@ const BottomNavBar = () => {
     },
   ];
   return (
-    <div>
+    <BottomNavBarWrapper>
       {navItems.map(({ path, icon }) => (
-        <Link key={path} to={path}>
+        <LinkWrapper
+          key={path}
+          to={path}
+          active={isPathActive(path).toString()}>
           {icon}
-        </Link>
+        </LinkWrapper>
       ))}
-    </div>
+    </BottomNavBarWrapper>
   );
 };
 
