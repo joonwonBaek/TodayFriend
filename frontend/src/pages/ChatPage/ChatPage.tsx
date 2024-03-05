@@ -1,31 +1,69 @@
-import { useState } from 'react';
+import { Client } from '@stomp/stompjs';
+import { useRef } from 'react';
 import SockJS from 'sockjs-client';
 
 export const ChatPage = () => {
-  const [socket, setSocket] = useState<WebSocket | null>(null);
+  const stompClient = useRef<Client>(null);
+  const client = new Client({
+    webSocketFactory: () => new SockJS('http://localhost:8080/ws'),
 
-  const connectSocket = () => {
-    if (!socket) {
-      const sock = new SockJS('http://localhost:8080/path');
-      setSocket(sock);
+    onConnect: () => {
+      console.log('Connected to WebSocket');
+    },
 
-      sock.onopen = () => {
-        console.log('Socket Opened');
-      };
+    onDisconnect: () => {
+      console.log('Disconnected from WebSocket');
+    },
 
-      sock.onmessage = (e) => {
-        console.log('Received:', e.data);
-      };
+    onStompError: (err) => {
+      console.log(err);
+    },
+  });
 
-      sock.onclose = () => {
-        console.log('Socket Closed');
-        setSocket(null);
-      };
-    }
+  const onConnected = () => {
+    client.subscribe(
+      `/from/game-room/${roomId}`,
+      (e) => onMessageReceived(e),
+      connectHeaders,
+    );
+    client.subscribe(
+      `/from/game-room/${roomId}/error`,
+      // eslint-disable-next-line no-console
+      (e) => console.log('----subscribe error----', e),
+      connectHeaders,
+    );
   };
+
+  const onDisconnected = (roomId: number) => {
+    client.publish({
+      destination: `/to/game-room/${roomId}`,
+      headers: connectHeaders,
+    });
+  };
+
+  // const onMessageReceived = ({ body }: { body: string }) => {
+  //   const responsePublish = JSON.parse(body);
+  //   setGameRoomRes(responsePublish);
+  //   if (checkIsEmptyObj(responsePublish)) {
+  //     setIsWsError(true);
+  //   }
+  // };
+
+  const handleEnterGameRoom = (roomId: number) => {
+    client.publish({
+      destination: `/to/game-room/${roomId}/enter`,
+      headers: connectHeaders,
+    });
+  };
+
+  client.activate();
+  // stompClient.current = client;
+  // return () => {
+  //   client.deactivate();
+  // };
   return (
     <div>
-      <button onClick={connectSocket}>소켓 테스트</button>
+      <button onClick={onConnected}>소켓 테스트</button>
     </div>
   );
 };

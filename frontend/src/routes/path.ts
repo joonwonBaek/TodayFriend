@@ -4,4 +4,5 @@ export const PATH = {
   SIGNUP: '/signup',
   MYPROFILE: '/myprofile',
   LOCATION: '/location',
+  CHAT: '/chat',
 };
